@@ -19,8 +19,9 @@ flutter版本为1.15.13
 
 ![扫码下载](https://assets-store-cdn.48lu.cn/assets-store/109f77412fe74fbc1206cf207dafe266.png)
 <br>
-- 项目截图:<br><br>
-注册<br>
+- 项目截图:
+
+登录<br>
 ![登录](https://assets-store-cdn.48lu.cn/assets-store/deda8cd3727026114df2954063982755.jpg?x-oss-process=image/resize,m_lfit,h_800,w_800)
 
 注册<br>
