@@ -22,15 +22,11 @@ flutter版本为1.15.13
 - 项目截图:<br><br>
 注册<br>
 ![登录](https://assets-store-cdn.48lu.cn/assets-store/deda8cd3727026114df2954063982755.jpg?x-oss-process=image/resize,m_lfit,h_800,w_800)
-<br>
 注册<br>
 ![注册](https://assets-store-cdn.48lu.cn/assets-store/cdd295a994595a1f6d7f755cdaaf5a2d.jpg?x-oss-process=image/resize,m_lfit,h_800,w_800)
-<br>
 找回密码<br>
 ![找回密码](https://assets-store-cdn.48lu.cn/assets-store/3dbabba76f96cf2c28990427038689e9.jpg?x-oss-process=image/resize,m_lfit,h_800,w_800)
-<br>
 app主页<br>
 ![app主页](https://assets-store-cdn.48lu.cn/assets-store/810cb039fc5af7b318425fbcefc5ec5b.jpg?x-oss-process=image/resize,m_lfit,h_800,w_800)
-<br>
 设备配网<br>
 ![设备配网](https://assets-store-cdn.48lu.cn/assets-store/2f600dff25cefe28d19c59ce73825894.jpg?x-oss-process=image/resize,m_lfit,h_800,w_800)
