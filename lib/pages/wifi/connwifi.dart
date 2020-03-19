@@ -1,6 +1,11 @@
+import 'dart:async';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:smartconfig/smartconfig.dart';
+import 'package:znjjwyz/config/config.dart';
+import 'package:znjjwyz/util/local_storage.dart';
 
 class Connwifi extends StatefulWidget {
   @override
@@ -9,12 +14,56 @@ class Connwifi extends StatefulWidget {
 
 class _ConnwifiState extends State<Connwifi> {
   String _bssid = '';
+  String _key = '';
+  String _keys = '';
   String _ssid = '';
   String _msg = '初始化中';
   TextEditingController _phonecontroller = new TextEditingController();
+  Timer _ct;
+  int _tmp = 0;
+
+  void _tgo() {
+    _ct = Timer.periodic(new Duration(seconds: 5), (timer) {
+      if (_tmp < 36) {
+        _tmp++;
+        _querySetNetWork();
+      } else {
+        setState(() {
+          _msg = '配网失败，请检测智能设备是否处于配网模式，Wi-Fi密码是否输入正确。';
+        });
+        if (_ct != null) _ct.cancel();
+      }
+    });
+  }
 
   _ConnwifiState() {
     _initWifi();
+  }
+
+  @override
+  void dispose() {
+    if (_ct != null) _ct.cancel();
+    super.dispose();
+  }
+
+  _querySetNetWork()async{
+    String token = await LocalStorage().get("token");
+    String url = Config().host +
+        "/device/querySetNetWork?key=" +
+        _keys +
+        "&token=" +
+        token;
+    final http.Response response = await http.get(url);
+    Utf8Decoder utf8decoder = new Utf8Decoder();
+    Map data = json.decode(utf8decoder.convert(response.bodyBytes));
+    print(data);
+    var result = data['code'];
+    if (result == 0) {
+      if (_ct != null) _ct.cancel();
+      setState(() {
+        _msg = '配网成功';
+      });
+    }
   }
 
   _initWifi() async {
@@ -23,6 +72,10 @@ class _ConnwifiState extends State<Connwifi> {
     String ssid = await (Connectivity().getWifiName());
 //    print(bssid + "||" + ip + "||" + ssid);
     _bssid = bssid;
+    _key = new DateTime.now().millisecondsSinceEpoch.toString();
+    _keys = _key;
+    _key = _key + "-" +await LocalStorage().get("userId");
+    print(_key);
     _ssid = ssid;
     if (_ssid == null ||
         _bssid == null ||
@@ -42,17 +95,10 @@ class _ConnwifiState extends State<Connwifi> {
 
   _smartConfig(String ssid, String bssid, String password) async {
     print("start Config ...");
-    Smartconfig.start(ssid, bssid, password).then((onValue) {
+    String password1 = password + "-w-y-z-" + _key;
+    Smartconfig.start(ssid, bssid, password1).then((onValue) {
       print("sm version $onValue");
-      if (null == onValue) {
-        setState(() {
-          _msg = '配网失败，请检测智能设备是否处于配网模式，Wi-Fi密码是否输入正确。';
-        });
-      } else {
-        setState(() {
-          _msg = '配网成功';
-        });
-      }
+      _smartConfig(ssid, bssid, password);
     });
   }
 
@@ -170,6 +216,7 @@ class _ConnwifiState extends State<Connwifi> {
                                             _msg = '请先输入8位及以上Wi-Fi密码！';
                                           } else {
                                             _msg = '';
+                                            _tgo();
                                             _smartConfig(_ssid, _bssid,
                                                 _phonecontroller.text);
                                           }

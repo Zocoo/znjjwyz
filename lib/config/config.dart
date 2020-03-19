@@ -4,5 +4,5 @@ class Config {
   String host = "http://ddz.so-what.cc";
 //  String host = "https://em.xhznkz.com/api";
   String localHost = 'http://192.168.11.1:8810';
-  int version = 59;
+  int version = 60;
 }
