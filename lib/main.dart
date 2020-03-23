@@ -1,8 +1,14 @@
+import 'package:amap_location/amap_location.dart';
 import 'package:flutter/material.dart';
 import 'package:znjjwyz/pages/login.dart';
 import 'package:znjjwyz/pages/version.dart';
 
-void main() => runApp(MyApp());
+//void main() => runApp(MyApp());
+
+void main(){
+  AMapLocationClient.setApiKey("ce9a29f515e246bc93fca7295bda2dcd");
+  runApp(new MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
