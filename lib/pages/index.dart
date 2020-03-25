@@ -93,16 +93,18 @@ class _IndexState extends State<Index> {
         String token = await LocalStorage().get("token");
         int f = 0;
         if (_deviceList[i].power == 'OFF') {
+//          print('aaaaaaaffffff');
           f = 1;
-          setState() {
+          setState(() {
             _deviceList[i].power = 'ON';
-          }
+//            print(_deviceList[i].power);
+          });
         } else {
           setState(() {
             _deviceList[i].power = 'OFF';
+//            print(_deviceList[i].power);
           });
         }
-        ;
         String url = Config().host +
             "/device/setPower?cid=" +
             _deviceList[i].sn +
@@ -497,14 +499,14 @@ class _IndexState extends State<Index> {
       }
       for (int i = 0; i < _deviceList.length; i++) {
         if (i % 2 != 0) {
-          print(_deviceList[i].remark);
+//          print(_deviceList[i].remark);
           List<String> _c1 = _deviceList[i - 1].remark.split("&&");
-          print(_c1);
+//          print(_c1);
           String url1 = _c1[2];
           String status1 = _c1[0];
           String name1 = _c1[1];
           List<String> _c2 = _deviceList[i].remark.split("&&");
-          print(_c2);
+//          print(_c2);
           String url2 = _c2[2];
           String status2 = _c2[0];
           String name2 = _c2[1];
