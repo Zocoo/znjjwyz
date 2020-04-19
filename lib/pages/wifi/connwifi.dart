@@ -82,7 +82,16 @@ class _ConnwifiState extends State<Connwifi> {
         _ssid.length < 1 ||
         _bssid.length < 1) {
       setState(() {
-        _msg = '请确认您手机已经连接到可用Wi-Fi，连接好后点击下方重试按钮。';
+        if(_ssid == null){
+          _ssid = '未能获取';
+        }
+        if(_bssid == null){
+          _bssid = '未能获取';
+        }
+        if(ip == null) {
+          ip = '未能获取';
+        }
+        _msg = '请确认您手机已经连接到可用Wi-Fi，连接好后点击下方重试按钮。ssid is == >' + _ssid + "|| bssid is == >" + _bssid +"|| ip is == >" + ip;
       });
     } else {
       setState(() {
@@ -132,10 +141,10 @@ class _ConnwifiState extends State<Connwifi> {
                   width: double.infinity,
                   height: 180,
                   child: Center(
-                    child: (_ssid == null ||
+                    child: ((_ssid == null ||
                             _bssid == null ||
                             _ssid.length < 1 ||
-                            _bssid.length < 1)
+                            _bssid.length < 1)&&(_ssid != '未能获取') &&(_bssid != '未能获取'))
                         ? MaterialButton(
                             color: Colors.white,
                             height: 45,

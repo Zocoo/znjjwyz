@@ -283,6 +283,7 @@ class _IndexState extends State<Index> {
       String url =
           "https://api.jisuapi.com/weather/query?appkey=ee33a933b039f5ef&location=" +
               ll;
+      print(ll);
       final http.Response response = await http.get(url);
       result1 = response.body;
       t = 1;
@@ -353,6 +354,7 @@ class _IndexState extends State<Index> {
           desiredAccuracy:
               CLLocationAccuracy.kCLLocationAccuracyHundredMeters));
       AMapLocation a = await AMapLocationClient.getLocation(true);
+      print(a.latitude.toString()+","+a.longitude.toString());
       await LocalStorage()
           .set('jwd', a.latitude.toString() + "," + a.longitude.toString());
       await LocalStorage().set("jwdsj",

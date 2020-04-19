@@ -6,6 +6,7 @@ import 'package:znjjwyz/pages/version.dart';
 //void main() => runApp(MyApp());
 
 void main(){
+  WidgetsFlutterBinding.ensureInitialized();
   AMapLocationClient.setApiKey("ce9a29f515e246bc93fca7295bda2dcd");
   runApp(new MyApp());
 }
